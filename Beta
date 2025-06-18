@@ -1,0 +1,122 @@
+
+/*  .--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--.  */
+/* / .. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \ */
+/* \ \/\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ \/ / */
+/*  \/ /`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'\/ /  */
+/*  / /\     ___      ___ _______   ________   ________  ___     ___    ___     / /\  */
+/* / /\ \   |\  \    /  /|\  ___ \ |\   ___  \|\   ____\|\  \   |\  \  /  /|   / /\ \ */
+/* \ \/ /   \ \  \  /  / | \   __/|\ \  \\ \  \ \  \___|\ \  \  \ \  \/  / /   \ \/ / */
+/*  \/ /     \ \  \/  / / \ \  \_|/_\ \  \\ \  \ \_____  \ \  \  \ \    / /     \/ /  */
+/*  / /\      \ \    / /   \ \  \_|\ \ \  \\ \  \|____|\  \ \  \  /     \/      / /\  */
+/* / /\ \      \ \__/ /     \ \_______\ \__\\ \__\____\_\  \ \__\/  /\   \     / /\ \ */
+/* \ \/ /       \|__|/       \|_______|\|__| \|__|\_________\|__/__/ /\ __\    \ \/ / */
+/*  \/ /                                         \|_________|   |__|/ \|__|     \/ /  */
+/*  / /\.--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--./ /\  */
+/* / /\ \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \/\ \ */
+/* \ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `' / */
+/*  `--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'  */
+--Official Discord Invite: .gg/Gb4H6Mr4ms
+
+while wait(50) do 
+warn('join our discord for updates: .gg/Gb4H6Mr4ms)
+end
+local service = setmetatable({}, {
+    __index = function(self, key)
+        local s = game:GetService(key)
+        self[key] = s
+        return s
+    end
+})
+
+local fts = getfenv().FireTouchInterest or getfenv().firetouchinterest
+local WS = service.Workspace
+local T = WS:WaitForChild("TouchTestParts")
+
+local wantedParts = {}
+
+local function GetWL()
+    local WL = T:FindFirstChild("WantedParts") or T:WaitForChild("WantedParts")
+    for _, v in pairs(WL:GetChildren()) do 
+        if v:IsA("BasePart") then
+            table.insert(wantedParts, v)
+        end
+    end
+end
+
+coroutine.wrap(GetWL)()
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wally2", true))()
+local w = library:CreateWindow('Wanted Levels')
+
+local function getChar()
+    local player = game.Players.LocalPlayer
+    return player.Character or player.CharacterAdded:Wait()
+end
+
+local function getHRP()
+    return getChar():WaitForChild("HumanoidRootPart")
+end
+
+
+if fts then 
+    for _, part in ipairs(wantedParts) do
+        w:Button('Set Wanted To: ' .. part.Name, function()
+            local myp = getHRP()
+            if myp then 
+                pcall(function()
+                    fts(myp, part, 1)
+                    task.wait(0.1)
+                    fts(myp, part, 0)
+                end)
+            end
+    end)
+end
+end
+-----------------
+
+local Npc_folder = WS:WaitForChild('NPCs')
+
+local function HeadSet1(arg, Input, ISize)
+    if not arg then return end
+    if arg:IsA("Model") then
+        local head = arg:FindFirstChild("Head") or arg:WaitForChild("Head")
+        if head and head:IsA("MeshPart") then
+            head.Size = ISize
+            head.Transparency = 0.5
+            head.CanCollide = false
+        end
+    end
+end
+
+local ISize = Vector3.new(20, 20, 20)
+local function SetHSIZE(Head)
+    if Head.Size ~= ISize then
+        HeadSet1(Head.Parent, Head, ISize)
+    end
+end
+local w1 = library:CreateWindow("NPC's")
+local _GlobalEnv = getgenv and getgenv() or _G
+_GlobalEnv.SetHSize = true 
+
+local box = w1:Box('WalkSpeed', {
+   flag = "HeadSize";
+   type = 'number';
+}, function(new)
+task.spawn(function()
+while _GlobalEnv.SetHSize do
+task.wait(1)
+for _, npc in pairs(Npc_folder:GetChildren()) do
+    local head = npc:FindFirstChild("Head")
+    if head then
+        SetHSIZE(head)
+        end
+      end
+    end
+
+end)
+end)
+local b1 = w1:Button("Stop Resizing", function()
+    _GlobalEnv.SetHSize = false 
+end)
+local b2 = w1:Button("Resize Head(Only if you clicked Stop Resizing)", function()
+    _GlobalEnv.SetHSize = true 
+end)
