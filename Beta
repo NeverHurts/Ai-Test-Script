@@ -97,7 +97,7 @@ local w1 = library:CreateWindow("NPC's")
 local _GlobalEnv = getgenv and getgenv() or _G
 _GlobalEnv.SetHSize = true 
 
-local box = w1:Box('WalkSpeed', {
+local box = w1:Box('HeadSize', {
    flag = "HeadSize";
    type = 'number';
 }, function(new)
