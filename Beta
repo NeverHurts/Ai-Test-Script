@@ -60,7 +60,7 @@ end
 
 local Npc_folder = WS:WaitForChild('NPCs')
 
-local function HeadSet1(arg, ISize)
+local function HeadSet1(arg,Input, ISize)
     if not arg then return end
     if arg:IsA("Model") then
         local head = arg:FindFirstChild("Head") or arg:WaitForChild("Head")
