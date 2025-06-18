@@ -19,10 +19,11 @@ local function getHRP()
 end
 
 
-local fts = getfenv().FireTouchInterest or getfenv().firetouchinterest
+local fts = getfenv().FireTouchInterest or getfenv().firetouchinterest or firetouchinterest;
+local fps = getfenv().fireproximityprompt or getfenv().FireProximityPrompt or fireproximityprompt;
 local WS = service.Workspace
 local T = WS:WaitForChild("TouchTestParts")
-
+local drop_f = WS:WaitForChild('Drops')
 local wantedParts = {}
 
 local function GetWL()
@@ -106,6 +107,7 @@ local b2 = w1:Button("Resize Head(Only if you clicked Stop Resizing)", function(
     _GlobalEnv.SetHSize = true 
 end)
 ---------------------------------
+
 local w2 = library:CreateWindow("Local Player")
 local Vest = T:WaitForChild('Vest')
 local AutoVest = w2:Toggle('AutoVest', {flag = "toggle1"})
@@ -124,6 +126,34 @@ task.spawn(function()
         end
     end
 end)
+w2:Section('Guns')
+w2:Button("Grab AR", function()
+    local myp = getHRP()
+    if myp then   
+        local wq = myp.CFrame
+      for _, v in pairs(drop_f:GetChildren()) do 
+        if v:IsA('Model') and not v:FindFirstChild('Fake_9mmx19') then
+            local h = v:FindFirstChild('Hitbox') 
+            if h then
+                local prox = h:FindFirstChildOfClass('ProximityPrompt')
+                if prox then
+                     myp.CFrame = CFrame.new(h.Position)
+                    task.wait(0.1)
+                    pcall(function()
+                        fps(prox, 1)
+                        task.wait(0.1)
+                        fps(prox, 0)
+                        task.wait(0.1)
+                        myp.CFrame = wq
+                    end)
+                    break
+                end
+            end
+        end
+      end
+    end
+end)
+
 
 
 --[[
