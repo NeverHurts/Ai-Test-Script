@@ -16,10 +16,8 @@
 /* \ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `' / */
 /*  `--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'  */
 --]]
---Official Discord Invite: .gg/Gb4H6Mr4ms
-
 while wait(50) do 
-warn('join our discord for updates: .gg/Gb4H6Mr4ms)
+    warn('join our discord for updates: .gg/Gb4H6Mr4ms')
 end
 local service = setmetatable({}, {
     __index = function(self, key)
@@ -98,7 +96,7 @@ local w1 = library:CreateWindow("NPC's")
 local _GlobalEnv = getgenv and getgenv() or _G
 _GlobalEnv.SetHSize = true 
 
-local box = w1:Box('HeadSize', {
+local box = w1:Box('WalkSpeed', {
    flag = "HeadSize";
    type = 'number';
 }, function(new)
