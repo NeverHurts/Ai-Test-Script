@@ -1,6 +1,4 @@
-if not game:IsLoaded() then
-		game.Loaded:Wait()
-end
+
 local TeleportService = game:GetService("TeleportService")
 
 local service = setmetatable({}, {
