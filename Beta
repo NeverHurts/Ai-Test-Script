@@ -1,5 +1,4 @@
 
-local TeleportService = game:GetService("TeleportService")
 
 local service = setmetatable({}, {
     __index = function(self, key)
